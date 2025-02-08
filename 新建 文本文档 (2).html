@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片点击弹窗</title>
+    <!-- 引入Google Fonts字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            max-width: 90%;
+            max-height: 90vh;
+            /* 添加淡入动画 */
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+        }
+        .modal-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            /* 悬停效果 */
+            transition: transform 0.2s ease-in-out;
+        }
+        .modal-close:hover {
+            transform: scale(1.1);
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        /* 为图片添加滤镜效果 */
+        img {
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- 主图片（确保设置正确的原始尺寸） -->
+    <img 
+        src="lz.jpg" 
+        usemap="#image-map"
+        style="max-width: 100%; height: auto;"
+        id="mainImage"
+    >
+    <!-- 图像映射（已修正坐标顺序） -->
+    <map name="image-map">
+        <!-- 修正后的坐标示例 -->
+<area shape="rect" coords="590,740,890,920" onclick="showImage('2.jpg')">
+<area shape="rect" coords="410,760,610,910" onclick="showImage('3.jpg')">
+<area shape="rect" coords="240,780,410,940" onclick="showImage('4.jpg')">
+<area shape="rect" coords="40,860,280,1040" onclick="showImage('5.jpg')">
+<area shape="rect" coords="40,780,280,880" onclick="showImage('6.jpg')">
+<area shape="rect" coords="170,1020,520,1290" onclick="showImage('7.jpg')">
+<area shape="rect" coords="510,1060,820,1290" onclick="showImage('8.jpg')">
+<area shape="rect" coords="1040,930,1340,1090" onclick="showImage('9.jpg')">
+<area shape="rect" coords="930,1100,1200,1270" onclick="showImage('10.jpg')">
+<area shape="rect" coords="880,850,1050,990" onclick="showImage('11.jpg')">
+<area shape="rect" coords="1330,610,1480,830" onclick="showImage('12.jpg')">
+<area shape="rect" coords="1070,570,1310,810" onclick="showImage('13.jpg')">
+<area shape="rect" coords="610,920,890,1080" onclick="showImage('14.jpg')">
+<area shape="rect" coords="760,50,960,190" onclick="showImage('15.jpg')">
+<area shape="rect" coords="480,150,590,240" onclick="showImage('16.jpg')">
+<area shape="rect" coords="840,360,1120,540" onclick="showImage('17.jpg')">
+<area shape="rect" coords="550,220,690,320" onclick="showImage('18.jpg')">
+<area shape="rect" coords="660,240,760,330" onclick="showImage('19.jpg')">
+<area shape="rect" coords="720,260,840,380" onclick="showImage('20.jpg')">
+<area shape="rect" coords="930,80,1040,140" onclick="showImage('21.jpg')">
+<area shape="rect" coords="970,110,1080,200" onclick="showImage('22.jpg')">
+<area shape="rect" coords="830,280,980,380" onclick="showImage('23.jpg')">
+<area shape="rect" coords="880,150,1000,260" onclick="showImage('24.jpg')">
+<area shape="rect" coords="950,250,1090,390" onclick="showImage('25.jpg')">
+<area shape="rect" coords="310,580,510,740" onclick="showImage('26.jpg')">
+<area shape="rect" coords="180,640,370,770" onclick="showImage('27.jpg')">
+<area shape="rect" coords="640,560,860,720" onclick="showImage('28.jpg')">
+<area shape="rect" coords="850,570,1080,720" onclick="showImage('29.jpg')">
+<area shape="rect" coords="880,700,1080,810" onclick="showImage('30.jpg')">
+<area shape="rect" coords="1100,350,1430,550" onclick="showImage('31.jpg')">
+<area shape="rect" coords="20,20,230,240" onclick="showImage('32.jpg')">
+<area shape="rect" coords="10,610,180,790" onclick="showImage('33.jpg')">
+<area shape="rect" coords="40,320,350,570" onclick="showImage('34.jpg')">
+<area shape="rect" coords="400,340,700,560" onclick="showImage('35.jpg')">
+<area shape="rect" coords="590,50,810,230" onclick="showImage('36.jpg')">
+<area shape="rect" coords="1080,20,1420,140" onclick="showImage('37.jpg')">
+<area shape="rect" coords="1120,130,1440,240" onclick="showImage('38.jpg')">
+<area shape="rect" coords="1140,250,1430,380" onclick="showImage('39.jpg')">
+    </map>
+    <!-- 弹窗结构 -->
+    <div class="overlay" id="overlay" onclick="closeModal()"></div>
+    <div class="modal" id="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img class="modal-img" id="modalImage" src="" alt="弹窗图片">
+    </div>
+    <script>
+        // 弹窗控制函数
+        function showImage(imgUrl) {
+            const modal = document.getElementById('modal');
+            const overlay = document.getElementById('overlay');
+            const modalImg = document.getElementById('modalImage');
+            
+            modalImg.src = imgUrl;
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+        // 自动修复所有坐标顺序
+        document.querySelectorAll('area').forEach(area => {
+            const coords = area.getAttribute('coords').split(',').map(Number);
+            
+            // 确保坐标格式为 [x1,y1,x2,y2] 且 x1<x2, y1<y2
+            if (coords[0] > coords[2]) [coords[0], coords[2]] = [coords[2], coords[0]];
+            if (coords[1] > coords[3]) [coords[1], coords[3]] = [coords[3], coords[1]];
+            
+            area.setAttribute('coords', coords.join(','));
+        });
+        // 响应式适配（解决坐标偏移问题）
+        const mainImage = document.getElementById('mainImage');
+        let naturalWidth = mainImage.naturalWidth;
+        let naturalHeight = mainImage.naturalHeight;
+        // 监听图片加载完成
+        mainImage.onload = () => {
+            naturalWidth = mainImage.naturalWidth;
+            naturalHeight = mainImage.naturalHeight;
+        };
+        // 监听窗口大小变化
+        window.addEventListener('resize', () => {
+            const scaleX = naturalWidth / mainImage.offsetWidth;
+            const scaleY = naturalHeight / mainImage.offsetHeight;
+            
+            document.querySelectorAll('area').forEach(area => {
+                const coords = area.getAttribute('coords').split(',').map(Number);
+                const scaledCoords = [
+                    Math.round(coords[0] / scaleX),
+                    Math.round(coords[1] / scaleY),
+                    Math.round(coords[2] / scaleX),
+                    Math.round(coords[3] / scaleY)
+                ];
+                area.setAttribute('coords', scaledCoords.join(','));
+            });
+        });
+    </script>
+</body>
+</html>

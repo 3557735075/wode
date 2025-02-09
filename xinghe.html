@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>码上聚星河</title>
+    <title>图片点击弹窗</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -72,49 +72,64 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+        /* 添加移动端适配样式 */
+        @media (max-width: 768px) {
+           .modal {
+                max-width: 95%;
+                max-height: 85vh;
+            }
+           .modal-close {
+                top: -10px;
+                right: -10px;
+                width: 25px;
+                height: 25px;
+                line-height: 25px;
+            }
+        }
     </style>
 </head>
 <body>
     <img src="lz.jpg" usemap="#image-map" style="width: 100%; height: auto;" id="mainImage">
     <map name="image-map">
-        <area shape="rect" coords="590,740,890,920" onclick="showImage('2.jpg')" ontouchstart="showImage('2.jpg')">
-        <area shape="rect" coords="410,760,610,910" onclick="showImage('3.jpg')" ontouchstart="showImage('3.jpg')">
-        <area shape="rect" coords="240,780,410,940" onclick="showImage('4.jpg')" ontouchstart="showImage('4.jpg')">
-        <area shape="rect" coords="40,860,280,1040" onclick="showImage('5.jpg')" ontouchstart="showImage('5.jpg')">
-        <area shape="rect" coords="40,780,280,880" onclick="showImage('6.jpg')" ontouchstart="showImage('6.jpg')">
-        <area shape="rect" coords="170,1020,520,1290" onclick="showImage('7.jpg')" ontouchstart="showImage('7.jpg')">
-        <area shape="rect" coords="510,1060,820,1290" onclick="showImage('8.jpg')" ontouchstart="showImage('8.jpg')">
-        <area shape="rect" coords="1040,930,1340,1090" onclick="showImage('9.jpg')" ontouchstart="showImage('9.jpg')">
-        <area shape="rect" coords="930,1100,1200,1270" onclick="showImage('10.jpg')" ontouchstart="showImage('10.jpg')">
-        <area shape="rect" coords="880,850,1050,990" onclick="showImage('11.jpg')" ontouchstart="showImage('11.jpg')">
-        <area shape="rect" coords="1330,610,1480,830" onclick="showImage('12.jpg')" ontouchstart="showImage('12.jpg')">
-        <area shape="rect" coords="1070,570,1310,810" onclick="showImage('13.jpg')" ontouchstart="showImage('13.jpg')">
-        <area shape="rect" coords="610,920,890,1080" onclick="showImage('14.jpg')" ontouchstart="showImage('14.jpg')">
-        <area shape="rect" coords="760,50,960,190" onclick="showImage('15.jpg')" ontouchstart="showImage('15.jpg')">
-        <area shape="rect" coords="480,150,590,240" onclick="showImage('16.jpg')" ontouchstart="showImage('16.jpg')">
-        <area shape="rect" coords="840,360,1120,540" onclick="showImage('17.jpg')" ontouchstart="showImage('17.jpg')">
-        <area shape="rect" coords="550,220,690,320" onclick="showImage('18.jpg')" ontouchstart="showImage('18.jpg')">
-        <area shape="rect" coords="660,240,760,330" onclick="showImage('19.jpg')" ontouchstart="showImage('19.jpg')">
-        <area shape="rect" coords="720,260,840,380" onclick="showImage('20.jpg')" ontouchstart="showImage('20.jpg')">
-        <area shape="rect" coords="930,80,1040,140" onclick="showImage('21.jpg')" ontouchstart="showImage('21.jpg')">
-        <area shape="rect" coords="970,110,1080,200" onclick="showImage('22.jpg')" ontouchstart="showImage('22.jpg')">
-        <area shape="rect" coords="830,280,980,380" onclick="showImage('23.jpg')" ontouchstart="showImage('23.jpg')">
-        <area shape="rect" coords="880,150,1000,260" onclick="showImage('24.jpg')" ontouchstart="showImage('24.jpg')">
-        <area shape="rect" coords="950,250,1090,390" onclick="showImage('25.jpg')" ontouchstart="showImage('25.jpg')">
-        <area shape="rect" coords="310,580,510,740" onclick="showImage('26.jpg')" ontouchstart="showImage('26.jpg')">
-        <area shape="rect" coords="180,640,370,770" onclick="showImage('27.jpg')" ontouchstart="showImage('27.jpg')">
-        <area shape="rect" coords="640,560,860,720" onclick="showImage('28.jpg')" ontouchstart="showImage('28.jpg')">
-        <area shape="rect" coords="850,570,1080,720" onclick="showImage('29.jpg')" ontouchstart="showImage('29.jpg')">
-        <area shape="rect" coords="880,700,1080,810" onclick="showImage('30.jpg')" ontouchstart="showImage('30.jpg')">
-        <area shape="rect" coords="1100,350,1430,550" onclick="showImage('31.jpg')" ontouchstart="showImage('31.jpg')">
-        <area shape="rect" coords="20,20,230,240" onclick="showImage('32.jpg')" ontouchstart="showImage('32.jpg')">
-        <area shape="rect" coords="10,610,180,790" onclick="showImage('33.jpg')" ontouchstart="showImage('33.jpg')">
-        <area shape="rect" coords="40,320,350,570" onclick="showImage('34.jpg')" ontouchstart="showImage('34.jpg')">
-        <area shape="rect" coords="400,340,700,560" onclick="showImage('35.jpg')" ontouchstart="showImage('35.jpg')">
-        <area shape="rect" coords="590,50,810,230" onclick="showImage('36.jpg')" ontouchstart="showImage('36.jpg')">
-        <area shape="rect" coords="1080,20,1420,140" onclick="showImage('37.jpg')" ontouchstart="showImage('37.jpg')">
-        <area shape="rect" coords="1120,130,1440,240" onclick="showImage('38.jpg')" ontouchstart="showImage('38.jpg')">
-        <area shape="rect" coords="1140,250,1430,380" onclick="showImage('39.jpg')" ontouchstart="showImage('39.jpg')">
+        <!-- 修改所有 <area> 标签，示例： -->
+        <area shape="rect" coords="590,740,890,920" data-img="2.jpg">
+        <area shape="rect" coords="410,760,610,910" data-img="3.jpg">
+        <area shape="rect" coords="240,780,410,940" data-img="4.jpg">
+        <area shape="rect" coords="40,860,280,1040" data-img="5.jpg">
+        <area shape="rect" coords="40,780,280,880" data-img="6.jpg">
+        <area shape="rect" coords="170,1020,520,1290" data-img="7.jpg">
+        <area shape="rect" coords="510,1060,820,1290" data-img="8.jpg">
+        <area shape="rect" coords="1040,930,1340,1090" data-img="9.jpg">
+        <area shape="rect" coords="930,1100,1200,1270" data-img="10.jpg">
+        <area shape="rect" coords="880,850,1050,990" data-img="11.jpg">
+        <area shape="rect" coords="1330,610,1480,830" data-img="12.jpg">
+        <area shape="rect" coords="1070,570,1310,810" data-img="13.jpg">
+        <area shape="rect" coords="610,920,890,1080" data-img="14.jpg">
+        <area shape="rect" coords="760,50,960,190" data-img="15.jpg">
+        <area shape="rect" coords="480,150,590,240" data-img="16.jpg">
+        <area shape="rect" coords="840,360,1120,540" data-img="17.jpg">
+        <area shape="rect" coords="550,220,690,320" data-img="18.jpg">
+        <area shape="rect" coords="660,240,760,330" data-img="19.jpg">
+        <area shape="rect" coords="720,260,840,380" data-img="20.jpg">
+        <area shape="rect" coords="930,80,1040,140" data-img="21.jpg">
+        <area shape="rect" coords="970,110,1080,200" data-img="22.jpg">
+        <area shape="rect" coords="830,280,980,380" data-img="23.jpg">
+        <area shape="rect" coords="880,150,1000,260" data-img="24.jpg">
+        <area shape="rect" coords="950,250,1090,390" data-img="25.jpg">
+        <area shape="rect" coords="310,580,510,740" data-img="26.jpg">
+        <area shape="rect" coords="180,640,370,770" data-img="27.jpg">
+        <area shape="rect" coords="640,560,860,720" data-img="28.jpg">
+        <area shape="rect" coords="850,570,1080,720" data-img="29.jpg">
+        <area shape="rect" coords="880,700,1080,810" data-img="30.jpg">
+        <area shape="rect" coords="1100,350,1430,550" data-img="31.jpg">
+        <area shape="rect" coords="20,20,230,240" data-img="32.jpg">
+        <area shape="rect" coords="10,610,180,790" data-img="33.jpg">
+        <area shape="rect" coords="40,320,350,570" data-img="34.jpg">
+        <area shape="rect" coords="400,340,700,560" data-img="35.jpg">
+        <area shape="rect" coords="590,50,810,230" data-img="36.jpg">
+        <area shape="rect" coords="1080,20,1420,140" data-img="37.jpg">
+        <area shape="rect" coords="1120,130,1440,240" data-img="38.jpg">
+        <area shape="rect" coords="1140,250,1430,380" data-img="39.jpg">
     </map>
     <div class="overlay" id="overlay" onclick="closeModal()" ontouchstart="closeModal()"></div>
     <div class="modal" id="modal">
@@ -122,6 +137,19 @@
         <img class="modal-img" id="modalImage" src="" alt="弹窗图片">
     </div>
     <script>
+        // 动态绑定事件
+        document.querySelectorAll('area').forEach(area => {
+            const imgUrl = area.getAttribute('data-img');
+            area.addEventListener('click', function(event) {
+                event.preventDefault();
+                showImage(imgUrl);
+            });
+            area.addEventListener('touchstart', function(event) {
+                event.preventDefault();
+                showImage(imgUrl);
+            });
+        });
+
         function showImage(imgUrl) {
             const modal = document.getElementById('modal');
             const overlay = document.getElementById('overlay');
@@ -134,6 +162,7 @@
             modal.style.display = 'block';
             overlay.style.display = 'block';
         }
+
         function closeModal() {
             const modal = document.getElementById('modal');
             const overlay = document.getElementById('overlay');
@@ -142,12 +171,14 @@
                 overlay.style.display = 'none';
             }
         }
+
         document.querySelectorAll('area').forEach(area => {
             const coords = area.getAttribute('coords').split(',').map(Number);
             if (coords[0] > coords[2]) [coords[0], coords[2]] = [coords[2], coords[0]];
             if (coords[1] > coords[3]) [coords[1], coords[3]] = [coords[3], coords[1]];
             area.setAttribute('coords', coords.join(','));
         });
+
         const mainImage = document.getElementById('mainImage');
         let naturalWidth = mainImage.naturalWidth;
         let naturalHeight = mainImage.naturalHeight;
@@ -155,6 +186,7 @@
             naturalWidth = mainImage.naturalWidth;
             naturalHeight = mainImage.naturalHeight;
         };
+
         window.addEventListener('resize', () => {
             const scaleX = naturalWidth / mainImage.offsetWidth;
             const scaleY = naturalHeight / mainImage.offsetHeight;
@@ -169,6 +201,7 @@
                 area.setAttribute('coords', scaledCoords.join(','));
             });
         });
+
         const imagesToLoad = ['lz.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', '29.jpg', '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', '37.jpg', '38.jpg', '39.jpg'];
         const preloadedImages = {};
         imagesToLoad.forEach(image => {
